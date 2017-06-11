@@ -1,0 +1,978 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Medical_MachineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="allergic_medications">
+    <Key>
+      <PropertyRef Name="allergic_ID" />
+    </Key>
+    <Property Name="allergic_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="allergic_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="city">
+    <Key>
+      <PropertyRef Name="city_ID" />
+    </Key>
+    <Property Name="city_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="city_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="clinics" Relationship="Self.FK_clinics_city" FromRole="cities" ToRole="clinics" />
+    <NavigationProperty Name="hospitals" Relationship="Self.FK_hospitals_city" FromRole="cities" ToRole="hospitals" />
+    <NavigationProperty Name="pharmacies" Relationship="Self.FK_pharmacies_city" FromRole="cities" ToRole="pharmacies" />
+    <NavigationProperty Name="physicians" Relationship="Self.FK_physicians_city" FromRole="cities" ToRole="physicians" />
+    <NavigationProperty Name="therapeutic_facilities" Relationship="Self.FK_therapeutic_facilities_city" FromRole="cities" ToRole="therapeutic_facilities" />
+  </EntityType>
+  <EntityType Name="clinic_types">
+    <Key>
+      <PropertyRef Name="clinic_type_ID" />
+    </Key>
+    <Property Name="clinic_type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clinic_type_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="clinics" Relationship="Self.FK_clinics_clinic_types" FromRole="clinic_types" ToRole="clinics" />
+  </EntityType>
+  <EntityType Name="clinical_visits">
+    <Key>
+      <PropertyRef Name="clinic_visit_ID" />
+    </Key>
+    <Property Name="clinic_visit_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clinic_info_ID" Type="Int32" Nullable="false" />
+    <Property Name="clinic_visit_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="clinic_visit_time" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="clinic_referring_doctor_ID" Type="Int32" Nullable="false" />
+    <Property Name="clinic_detailed_treatment" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="clinic_results" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="clinic" Relationship="Self.FK_clinical_visits_clinics" FromRole="clinical_visits" ToRole="clinics" />
+    <NavigationProperty Name="physician" Relationship="Self.FK_clinical_visits_physicians" FromRole="clinical_visits" ToRole="physicians" />
+  </EntityType>
+  <EntityType Name="clinic">
+    <Key>
+      <PropertyRef Name="clinic_ID" />
+    </Key>
+    <Property Name="clinic_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clinic_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="clinic_type_ID" Type="Int32" Nullable="false" />
+    <Property Name="clinic_phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="clinic_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="city_ID" Type="Int32" Nullable="false" />
+    <Property Name="state_ID" Type="Int32" Nullable="false" />
+    <Property Name="zipcode_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="city" Relationship="Self.FK_clinics_city" FromRole="clinics" ToRole="cities" />
+    <NavigationProperty Name="clinic_types" Relationship="Self.FK_clinics_clinic_types" FromRole="clinics" ToRole="clinic_types" />
+    <NavigationProperty Name="clinical_visits" Relationship="Self.FK_clinical_visits_clinics" FromRole="clinics" ToRole="clinical_visits" />
+    <NavigationProperty Name="state" Relationship="Self.FK_clinics_state" FromRole="clinics" ToRole="states" />
+    <NavigationProperty Name="zipcode" Relationship="Self.FK_clinics_zipcode" FromRole="clinics" ToRole="zipcodes" />
+  </EntityType>
+  <EntityType Name="facility_types">
+    <Key>
+      <PropertyRef Name="facility_type_ID" />
+    </Key>
+    <Property Name="facility_type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="facility_type_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="therapeutic_facilities" Relationship="Self.FK_therapeutic_facilities_facility_types" FromRole="facility_types" ToRole="therapeutic_facilities" />
+  </EntityType>
+  <EntityType Name="general_medications">
+    <Key>
+      <PropertyRef Name="general_medicine_ID" />
+    </Key>
+    <Property Name="general_medicine_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="general_medicine_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="prescription_medication_interactions" Relationship="Self.FK_prescription_medication_interactions_general_medications" FromRole="general_medications" ToRole="prescription_medication_interactions" />
+  </EntityType>
+  <EntityType Name="hospital_departments">
+    <Key>
+      <PropertyRef Name="hospital_department_ID" />
+    </Key>
+    <Property Name="hospital_department_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="hospital_department_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="hospitals" Relationship="Self.FK_hospitals_hospital_departments" FromRole="hospital_departments" ToRole="hospitals" />
+  </EntityType>
+  <EntityType Name="hospital_visits">
+    <Key>
+      <PropertyRef Name="hospital_visit_ID" />
+    </Key>
+    <Property Name="hospital_visit_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="hospital_info_ID" Type="Int32" Nullable="false" />
+    <Property Name="hospital_visit_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="hospital_visit_reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="hospital_attending_physician_ID" Type="Int32" Nullable="false" />
+    <Property Name="hospital_visit_discharge_direction" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="hospital_diagnosis" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="hospital_wasAdmitted" Type="Boolean" />
+    <Property Name="hospital_co_insurer" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="hospital" Relationship="Self.FK_hospital_visits_hospitals" FromRole="hospital_visits" ToRole="hospitals" />
+    <NavigationProperty Name="physician" Relationship="Self.FK_hospital_visits_physicians" FromRole="hospital_visits" ToRole="physicians" />
+  </EntityType>
+  <EntityType Name="hospital">
+    <Key>
+      <PropertyRef Name="hospital_ID" />
+    </Key>
+    <Property Name="hospital_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="hospital_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="hospital_department_ID" Type="Int32" Nullable="false" />
+    <Property Name="hospital_physician_ID" Type="Int32" />
+    <Property Name="hospital_phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="hospital_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="city_ID" Type="Int32" Nullable="false" />
+    <Property Name="state_ID" Type="Int32" Nullable="false" />
+    <Property Name="zipcode_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="city" Relationship="Self.FK_hospitals_city" FromRole="hospitals" ToRole="cities" />
+    <NavigationProperty Name="hospital_departments" Relationship="Self.FK_hospitals_hospital_departments" FromRole="hospitals" ToRole="hospital_departments" />
+    <NavigationProperty Name="hospital_visits" Relationship="Self.FK_hospital_visits_hospitals" FromRole="hospitals" ToRole="hospital_visits" />
+    <NavigationProperty Name="physician" Relationship="Self.FK_hospitals_physicians" FromRole="hospitals" ToRole="physicians" />
+    <NavigationProperty Name="state" Relationship="Self.FK_hospitals_state" FromRole="hospitals" ToRole="states" />
+    <NavigationProperty Name="zipcode" Relationship="Self.FK_hospitals_zipcode" FromRole="hospitals" ToRole="zipcodes" />
+  </EntityType>
+  <EntityType Name="medical_conditions">
+    <Key>
+      <PropertyRef Name="medical_condition_ID" />
+    </Key>
+    <Property Name="medical_condition_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="medical_condition" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="medical_condition_diagnosis_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="medical_condition_diagnosing_doctor_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="physician" Relationship="Self.FK_medical_conditions_physicians" FromRole="medical_conditions" ToRole="physicians" />
+  </EntityType>
+  <EntityType Name="medicine_dosage_units">
+    <Key>
+      <PropertyRef Name="medicine_dosage_unit_ID" />
+    </Key>
+    <Property Name="medicine_dosage_unit_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="medicine_dosage_unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="prescription_medications" Relationship="Self.FK_prescription_medications_medicine_dosage_units" FromRole="medicine_dosage_units" ToRole="prescription_medications" />
+    <NavigationProperty Name="vitamins" Relationship="Self.FK_vitamins_medicine_dosage_units" FromRole="medicine_dosage_units" ToRole="vitamins" />
+  </EntityType>
+  <EntityType Name="medicine_forms">
+    <Key>
+      <PropertyRef Name="medicine_form_ID" />
+    </Key>
+    <Property Name="medicine_form_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="medicine_form" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="prescription_medications" Relationship="Self.FK_prescription_medications_medicine_forms" FromRole="medicine_forms" ToRole="prescription_medications" />
+  </EntityType>
+  <EntityType Name="medicine_strength_units">
+    <Key>
+      <PropertyRef Name="medicine_strength_unit_ID" />
+    </Key>
+    <Property Name="medicine_strength_unit_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="medicine_strength_units1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="prescription_medications" Relationship="Self.FK_prescription_medications_medicine_strength_units" FromRole="medicine_strength_units" ToRole="prescription_medications" />
+    <NavigationProperty Name="vitamins" Relationship="Self.FK_vitamins_medicine_strength_units" FromRole="medicine_strength_units" ToRole="vitamins" />
+  </EntityType>
+  <EntityType Name="pharmacy">
+    <Key>
+      <PropertyRef Name="pharmacy_ID" />
+    </Key>
+    <Property Name="pharmacy_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pharmacy_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pharmacy_phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="pharmacy_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="city_ID" Type="Int32" Nullable="false" />
+    <Property Name="state_ID" Type="Int32" Nullable="false" />
+    <Property Name="zipcode_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="city" Relationship="Self.FK_pharmacies_city" FromRole="pharmacies" ToRole="cities" />
+    <NavigationProperty Name="state" Relationship="Self.FK_pharmacies_state" FromRole="pharmacies" ToRole="states" />
+    <NavigationProperty Name="zipcode" Relationship="Self.FK_pharmacies_zipcode" FromRole="pharmacies" ToRole="zipcodes" />
+    <NavigationProperty Name="prescription_medications" Relationship="Self.FK_prescription_medications_pharmacies" FromRole="pharmacies" ToRole="prescription_medications" />
+  </EntityType>
+  <EntityType Name="physician_specialties">
+    <Key>
+      <PropertyRef Name="physician_specialty_ID" />
+    </Key>
+    <Property Name="physician_specialty_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="specialty_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="physicians" Relationship="Self.FK_physicians_physician_specialties" FromRole="physician_specialties" ToRole="physicians" />
+  </EntityType>
+  <EntityType Name="physician_visits">
+    <Key>
+      <PropertyRef Name="physician_visit_ID" />
+    </Key>
+    <Property Name="physician_visit_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="physician_info_ID" Type="Int32" Nullable="false" />
+    <Property Name="physician_visit_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="physician_visit_time" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="physician_visit_blood_pressure" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="physician_visit_weight" Type="Int32" Nullable="false" />
+    <Property Name="physician_visit_temperature" Type="Int32" Nullable="false" />
+    <Property Name="physician_visit_reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="physician_visit_result" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="physician_visit_note" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="physician" Relationship="Self.FK_physician_visits_physicians" FromRole="physician_visits" ToRole="physicians" />
+  </EntityType>
+  <EntityType Name="physician">
+    <Key>
+      <PropertyRef Name="physician_ID" />
+    </Key>
+    <Property Name="physician_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="physician_specialty_ID" Type="Int32" Nullable="false" />
+    <Property Name="physician_phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="physician_lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="physician_firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="physician_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="city_ID" Type="Int32" Nullable="false" />
+    <Property Name="state_ID" Type="Int32" Nullable="false" />
+    <Property Name="zipcode_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="city" Relationship="Self.FK_physicians_city" FromRole="physicians" ToRole="cities" />
+    <NavigationProperty Name="clinical_visits" Relationship="Self.FK_clinical_visits_physicians" FromRole="physicians" ToRole="clinical_visits" />
+    <NavigationProperty Name="hospital_visits" Relationship="Self.FK_hospital_visits_physicians" FromRole="physicians" ToRole="hospital_visits" />
+    <NavigationProperty Name="hospitals" Relationship="Self.FK_hospitals_physicians" FromRole="physicians" ToRole="hospitals" />
+    <NavigationProperty Name="medical_conditions" Relationship="Self.FK_medical_conditions_physicians" FromRole="physicians" ToRole="medical_conditions" />
+    <NavigationProperty Name="physician_specialties" Relationship="Self.FK_physicians_physician_specialties" FromRole="physicians" ToRole="physician_specialties" />
+    <NavigationProperty Name="physician_visits" Relationship="Self.FK_physician_visits_physicians" FromRole="physicians" ToRole="physician_visits" />
+    <NavigationProperty Name="state" Relationship="Self.FK_physicians_state" FromRole="physicians" ToRole="states" />
+    <NavigationProperty Name="zipcode" Relationship="Self.FK_physicians_zipcode" FromRole="physicians" ToRole="zipcodes" />
+    <NavigationProperty Name="prescription_medications" Relationship="Self.FK_prescription_medications_physicians" FromRole="physicians" ToRole="prescription_medications" />
+    <NavigationProperty Name="therapy_visits" Relationship="Self.FK_therapy_visits_physicians" FromRole="physicians" ToRole="therapy_visits" />
+  </EntityType>
+  <EntityType Name="prescription_medication_interactions">
+    <Key>
+      <PropertyRef Name="prescription_medicine_interaction_ID" />
+    </Key>
+    <Property Name="prescription_medicine_interaction_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="general_medicine_ID" Type="Int32" Nullable="false" />
+    <Property Name="medicine_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="general_medications" Relationship="Self.FK_prescription_medication_interactions_general_medications" FromRole="prescription_medication_interactions" ToRole="general_medications" />
+    <NavigationProperty Name="prescription_medications" Relationship="Self.FK_prescription_medication_interactions_prescription_medications" FromRole="prescription_medication_interactions" ToRole="prescription_medications" />
+  </EntityType>
+  <EntityType Name="prescription_medications">
+    <Key>
+      <PropertyRef Name="medicine_ID" />
+    </Key>
+    <Property Name="medicine_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="medicine_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="medicine_prescription_physician_ID" Type="Int32" Nullable="false" />
+    <Property Name="medicine_form_ID" Type="Int32" Nullable="false" />
+    <Property Name="medicine_strength" Type="Int32" Nullable="false" />
+    <Property Name="medicine_strength_unit_ID" Type="Int32" Nullable="false" />
+    <Property Name="medicine_dosage" Type="Int32" Nullable="false" />
+    <Property Name="medicine_dosage_unit_ID" Type="Int32" Nullable="false" />
+    <Property Name="medicine_pharmacy_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="medicine_dosage_units" Relationship="Self.FK_prescription_medications_medicine_dosage_units" FromRole="prescription_medications" ToRole="medicine_dosage_units" />
+    <NavigationProperty Name="medicine_forms" Relationship="Self.FK_prescription_medications_medicine_forms" FromRole="prescription_medications" ToRole="medicine_forms" />
+    <NavigationProperty Name="medicine_strength_units" Relationship="Self.FK_prescription_medications_medicine_strength_units" FromRole="prescription_medications" ToRole="medicine_strength_units" />
+    <NavigationProperty Name="pharmacy" Relationship="Self.FK_prescription_medications_pharmacies" FromRole="prescription_medications" ToRole="pharmacies" />
+    <NavigationProperty Name="physician" Relationship="Self.FK_prescription_medications_physicians" FromRole="prescription_medications" ToRole="physicians" />
+    <NavigationProperty Name="prescription_medication_interactions" Relationship="Self.FK_prescription_medication_interactions_prescription_medications" FromRole="prescription_medications" ToRole="prescription_medication_interactions" />
+  </EntityType>
+  <EntityType Name="state">
+    <Key>
+      <PropertyRef Name="state_ID" />
+    </Key>
+    <Property Name="state_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="state_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="clinics" Relationship="Self.FK_clinics_state" FromRole="states" ToRole="clinics" />
+    <NavigationProperty Name="hospitals" Relationship="Self.FK_hospitals_state" FromRole="states" ToRole="hospitals" />
+    <NavigationProperty Name="pharmacies" Relationship="Self.FK_pharmacies_state" FromRole="states" ToRole="pharmacies" />
+    <NavigationProperty Name="physicians" Relationship="Self.FK_physicians_state" FromRole="states" ToRole="physicians" />
+    <NavigationProperty Name="therapeutic_facilities" Relationship="Self.FK_therapeutic_facilities_state" FromRole="states" ToRole="therapeutic_facilities" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="therapeutic_facilities">
+    <Key>
+      <PropertyRef Name="facility_ID" />
+    </Key>
+    <Property Name="facility_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="facility_type_ID" Type="Int32" Nullable="false" />
+    <Property Name="facility_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="facility_phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="facility_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="city_ID" Type="Int32" Nullable="false" />
+    <Property Name="state_ID" Type="Int32" Nullable="false" />
+    <Property Name="zipcode_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="city" Relationship="Self.FK_therapeutic_facilities_city" FromRole="therapeutic_facilities" ToRole="cities" />
+    <NavigationProperty Name="facility_types" Relationship="Self.FK_therapeutic_facilities_facility_types" FromRole="therapeutic_facilities" ToRole="facility_types" />
+    <NavigationProperty Name="state" Relationship="Self.FK_therapeutic_facilities_state" FromRole="therapeutic_facilities" ToRole="states" />
+    <NavigationProperty Name="zipcode" Relationship="Self.FK_therapeutic_facilities_zipcode" FromRole="therapeutic_facilities" ToRole="zipcodes" />
+    <NavigationProperty Name="therapy_visits" Relationship="Self.FK_therapy_visits_therapeutic_facilities1" FromRole="therapeutic_facilities" ToRole="therapy_visits" />
+  </EntityType>
+  <EntityType Name="therapy_visit_types">
+    <Key>
+      <PropertyRef Name="therapy_visit_type_ID" />
+    </Key>
+    <Property Name="therapy_visit_type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="therapy_visit_type_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="therapy_visits" Relationship="Self.FK_therapy_visits_therapy_visit_types" FromRole="therapy_visit_types" ToRole="therapy_visits" />
+  </EntityType>
+  <EntityType Name="therapy_visits">
+    <Key>
+      <PropertyRef Name="therapy_visit_ID" />
+    </Key>
+    <Property Name="therapy_visit_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="therapy_info_ID" Type="Int32" Nullable="false" />
+    <Property Name="therapy_visit_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="therapy_visit_time" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="therapy_visit_type_ID" Type="Int32" Nullable="false" />
+    <Property Name="therapy_visit_fee" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="therapy_referring_doctor_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="physician" Relationship="Self.FK_therapy_visits_physicians" FromRole="therapy_visits" ToRole="physicians" />
+    <NavigationProperty Name="therapeutic_facilities" Relationship="Self.FK_therapy_visits_therapeutic_facilities1" FromRole="therapy_visits" ToRole="therapeutic_facilities" />
+    <NavigationProperty Name="therapy_visit_types" Relationship="Self.FK_therapy_visits_therapy_visit_types" FromRole="therapy_visits" ToRole="therapy_visit_types" />
+  </EntityType>
+  <EntityType Name="vitamin">
+    <Key>
+      <PropertyRef Name="vitamin_ID" />
+    </Key>
+    <Property Name="vitamin_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vitamin_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="medicine_dosage_ID" Type="Int32" Nullable="false" />
+    <Property Name="medicine_dosage" Type="Int32" Nullable="false" />
+    <Property Name="medicine_strength_ID" Type="Int32" Nullable="false" />
+    <Property Name="medicine_strength" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="medicine_dosage_units" Relationship="Self.FK_vitamins_medicine_dosage_units" FromRole="vitamins" ToRole="medicine_dosage_units" />
+    <NavigationProperty Name="medicine_strength_units" Relationship="Self.FK_vitamins_medicine_strength_units" FromRole="vitamins" ToRole="medicine_strength_units" />
+  </EntityType>
+  <EntityType Name="zipcode">
+    <Key>
+      <PropertyRef Name="zipcode_ID" />
+    </Key>
+    <Property Name="zipcode_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="zipcode1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="clinics" Relationship="Self.FK_clinics_zipcode" FromRole="zipcodes" ToRole="clinics" />
+    <NavigationProperty Name="hospitals" Relationship="Self.FK_hospitals_zipcode" FromRole="zipcodes" ToRole="hospitals" />
+    <NavigationProperty Name="pharmacies" Relationship="Self.FK_pharmacies_zipcode" FromRole="zipcodes" ToRole="pharmacies" />
+    <NavigationProperty Name="physicians" Relationship="Self.FK_physicians_zipcode" FromRole="zipcodes" ToRole="physicians" />
+    <NavigationProperty Name="therapeutic_facilities" Relationship="Self.FK_therapeutic_facilities_zipcode" FromRole="zipcodes" ToRole="therapeutic_facilities" />
+  </EntityType>
+  <Association Name="FK_clinics_city">
+    <End Role="cities" Type="Self.city" Multiplicity="1" />
+    <End Role="clinics" Type="Self.clinic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cities">
+        <PropertyRef Name="city_ID" />
+      </Principal>
+      <Dependent Role="clinics">
+        <PropertyRef Name="city_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hospitals_city">
+    <End Role="cities" Type="Self.city" Multiplicity="1" />
+    <End Role="hospitals" Type="Self.hospital" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cities">
+        <PropertyRef Name="city_ID" />
+      </Principal>
+      <Dependent Role="hospitals">
+        <PropertyRef Name="city_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pharmacies_city">
+    <End Role="cities" Type="Self.city" Multiplicity="1" />
+    <End Role="pharmacies" Type="Self.pharmacy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cities">
+        <PropertyRef Name="city_ID" />
+      </Principal>
+      <Dependent Role="pharmacies">
+        <PropertyRef Name="city_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_physicians_city">
+    <End Role="cities" Type="Self.city" Multiplicity="1" />
+    <End Role="physicians" Type="Self.physician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cities">
+        <PropertyRef Name="city_ID" />
+      </Principal>
+      <Dependent Role="physicians">
+        <PropertyRef Name="city_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_therapeutic_facilities_city">
+    <End Role="cities" Type="Self.city" Multiplicity="1" />
+    <End Role="therapeutic_facilities" Type="Self.therapeutic_facilities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cities">
+        <PropertyRef Name="city_ID" />
+      </Principal>
+      <Dependent Role="therapeutic_facilities">
+        <PropertyRef Name="city_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_clinics_clinic_types">
+    <End Role="clinic_types" Type="Self.clinic_types" Multiplicity="1" />
+    <End Role="clinics" Type="Self.clinic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clinic_types">
+        <PropertyRef Name="clinic_type_ID" />
+      </Principal>
+      <Dependent Role="clinics">
+        <PropertyRef Name="clinic_type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_clinical_visits_clinics">
+    <End Role="clinics" Type="Self.clinic" Multiplicity="1" />
+    <End Role="clinical_visits" Type="Self.clinical_visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clinics">
+        <PropertyRef Name="clinic_ID" />
+      </Principal>
+      <Dependent Role="clinical_visits">
+        <PropertyRef Name="clinic_info_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_clinical_visits_physicians">
+    <End Role="physicians" Type="Self.physician" Multiplicity="1" />
+    <End Role="clinical_visits" Type="Self.clinical_visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="physicians">
+        <PropertyRef Name="physician_ID" />
+      </Principal>
+      <Dependent Role="clinical_visits">
+        <PropertyRef Name="clinic_referring_doctor_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_clinics_state">
+    <End Role="states" Type="Self.state" Multiplicity="1" />
+    <End Role="clinics" Type="Self.clinic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="states">
+        <PropertyRef Name="state_ID" />
+      </Principal>
+      <Dependent Role="clinics">
+        <PropertyRef Name="state_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_clinics_zipcode">
+    <End Role="zipcodes" Type="Self.zipcode" Multiplicity="1" />
+    <End Role="clinics" Type="Self.clinic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zipcodes">
+        <PropertyRef Name="zipcode_ID" />
+      </Principal>
+      <Dependent Role="clinics">
+        <PropertyRef Name="zipcode_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_therapeutic_facilities_facility_types">
+    <End Role="facility_types" Type="Self.facility_types" Multiplicity="1" />
+    <End Role="therapeutic_facilities" Type="Self.therapeutic_facilities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="facility_types">
+        <PropertyRef Name="facility_type_ID" />
+      </Principal>
+      <Dependent Role="therapeutic_facilities">
+        <PropertyRef Name="facility_type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prescription_medication_interactions_general_medications">
+    <End Role="general_medications" Type="Self.general_medications" Multiplicity="1" />
+    <End Role="prescription_medication_interactions" Type="Self.prescription_medication_interactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="general_medications">
+        <PropertyRef Name="general_medicine_ID" />
+      </Principal>
+      <Dependent Role="prescription_medication_interactions">
+        <PropertyRef Name="general_medicine_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hospitals_hospital_departments">
+    <End Role="hospital_departments" Type="Self.hospital_departments" Multiplicity="1" />
+    <End Role="hospitals" Type="Self.hospital" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hospital_departments">
+        <PropertyRef Name="hospital_department_ID" />
+      </Principal>
+      <Dependent Role="hospitals">
+        <PropertyRef Name="hospital_department_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hospital_visits_hospitals">
+    <End Role="hospitals" Type="Self.hospital" Multiplicity="1" />
+    <End Role="hospital_visits" Type="Self.hospital_visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hospitals">
+        <PropertyRef Name="hospital_ID" />
+      </Principal>
+      <Dependent Role="hospital_visits">
+        <PropertyRef Name="hospital_info_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hospital_visits_physicians">
+    <End Role="physicians" Type="Self.physician" Multiplicity="1" />
+    <End Role="hospital_visits" Type="Self.hospital_visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="physicians">
+        <PropertyRef Name="physician_ID" />
+      </Principal>
+      <Dependent Role="hospital_visits">
+        <PropertyRef Name="hospital_attending_physician_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hospitals_physicians">
+    <End Role="physicians" Type="Self.physician" Multiplicity="0..1" />
+    <End Role="hospitals" Type="Self.hospital" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="physicians">
+        <PropertyRef Name="physician_ID" />
+      </Principal>
+      <Dependent Role="hospitals">
+        <PropertyRef Name="hospital_physician_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hospitals_state">
+    <End Role="states" Type="Self.state" Multiplicity="1" />
+    <End Role="hospitals" Type="Self.hospital" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="states">
+        <PropertyRef Name="state_ID" />
+      </Principal>
+      <Dependent Role="hospitals">
+        <PropertyRef Name="state_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hospitals_zipcode">
+    <End Role="zipcodes" Type="Self.zipcode" Multiplicity="1" />
+    <End Role="hospitals" Type="Self.hospital" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zipcodes">
+        <PropertyRef Name="zipcode_ID" />
+      </Principal>
+      <Dependent Role="hospitals">
+        <PropertyRef Name="zipcode_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_medical_conditions_physicians">
+    <End Role="physicians" Type="Self.physician" Multiplicity="1" />
+    <End Role="medical_conditions" Type="Self.medical_conditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="physicians">
+        <PropertyRef Name="physician_ID" />
+      </Principal>
+      <Dependent Role="medical_conditions">
+        <PropertyRef Name="medical_condition_diagnosing_doctor_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prescription_medications_medicine_dosage_units">
+    <End Role="medicine_dosage_units" Type="Self.medicine_dosage_units" Multiplicity="1" />
+    <End Role="prescription_medications" Type="Self.prescription_medications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicine_dosage_units">
+        <PropertyRef Name="medicine_dosage_unit_ID" />
+      </Principal>
+      <Dependent Role="prescription_medications">
+        <PropertyRef Name="medicine_dosage_unit_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_vitamins_medicine_dosage_units">
+    <End Role="medicine_dosage_units" Type="Self.medicine_dosage_units" Multiplicity="1" />
+    <End Role="vitamins" Type="Self.vitamin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicine_dosage_units">
+        <PropertyRef Name="medicine_dosage_unit_ID" />
+      </Principal>
+      <Dependent Role="vitamins">
+        <PropertyRef Name="medicine_dosage_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prescription_medications_medicine_forms">
+    <End Role="medicine_forms" Type="Self.medicine_forms" Multiplicity="1" />
+    <End Role="prescription_medications" Type="Self.prescription_medications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicine_forms">
+        <PropertyRef Name="medicine_form_ID" />
+      </Principal>
+      <Dependent Role="prescription_medications">
+        <PropertyRef Name="medicine_form_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prescription_medications_medicine_strength_units">
+    <End Role="medicine_strength_units" Type="Self.medicine_strength_units" Multiplicity="1" />
+    <End Role="prescription_medications" Type="Self.prescription_medications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicine_strength_units">
+        <PropertyRef Name="medicine_strength_unit_ID" />
+      </Principal>
+      <Dependent Role="prescription_medications">
+        <PropertyRef Name="medicine_strength_unit_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_vitamins_medicine_strength_units">
+    <End Role="medicine_strength_units" Type="Self.medicine_strength_units" Multiplicity="1" />
+    <End Role="vitamins" Type="Self.vitamin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicine_strength_units">
+        <PropertyRef Name="medicine_strength_unit_ID" />
+      </Principal>
+      <Dependent Role="vitamins">
+        <PropertyRef Name="medicine_strength_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pharmacies_state">
+    <End Role="states" Type="Self.state" Multiplicity="1" />
+    <End Role="pharmacies" Type="Self.pharmacy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="states">
+        <PropertyRef Name="state_ID" />
+      </Principal>
+      <Dependent Role="pharmacies">
+        <PropertyRef Name="state_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pharmacies_zipcode">
+    <End Role="zipcodes" Type="Self.zipcode" Multiplicity="1" />
+    <End Role="pharmacies" Type="Self.pharmacy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zipcodes">
+        <PropertyRef Name="zipcode_ID" />
+      </Principal>
+      <Dependent Role="pharmacies">
+        <PropertyRef Name="zipcode_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prescription_medications_pharmacies">
+    <End Role="pharmacies" Type="Self.pharmacy" Multiplicity="1" />
+    <End Role="prescription_medications" Type="Self.prescription_medications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pharmacies">
+        <PropertyRef Name="pharmacy_ID" />
+      </Principal>
+      <Dependent Role="prescription_medications">
+        <PropertyRef Name="medicine_pharmacy_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_physicians_physician_specialties">
+    <End Role="physician_specialties" Type="Self.physician_specialties" Multiplicity="1" />
+    <End Role="physicians" Type="Self.physician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="physician_specialties">
+        <PropertyRef Name="physician_specialty_ID" />
+      </Principal>
+      <Dependent Role="physicians">
+        <PropertyRef Name="physician_specialty_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_physician_visits_physicians">
+    <End Role="physicians" Type="Self.physician" Multiplicity="1" />
+    <End Role="physician_visits" Type="Self.physician_visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="physicians">
+        <PropertyRef Name="physician_ID" />
+      </Principal>
+      <Dependent Role="physician_visits">
+        <PropertyRef Name="physician_info_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_physicians_state">
+    <End Role="states" Type="Self.state" Multiplicity="1" />
+    <End Role="physicians" Type="Self.physician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="states">
+        <PropertyRef Name="state_ID" />
+      </Principal>
+      <Dependent Role="physicians">
+        <PropertyRef Name="state_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_physicians_zipcode">
+    <End Role="zipcodes" Type="Self.zipcode" Multiplicity="1" />
+    <End Role="physicians" Type="Self.physician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zipcodes">
+        <PropertyRef Name="zipcode_ID" />
+      </Principal>
+      <Dependent Role="physicians">
+        <PropertyRef Name="zipcode_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prescription_medications_physicians">
+    <End Role="physicians" Type="Self.physician" Multiplicity="1" />
+    <End Role="prescription_medications" Type="Self.prescription_medications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="physicians">
+        <PropertyRef Name="physician_ID" />
+      </Principal>
+      <Dependent Role="prescription_medications">
+        <PropertyRef Name="medicine_prescription_physician_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_therapy_visits_physicians">
+    <End Role="physicians" Type="Self.physician" Multiplicity="1" />
+    <End Role="therapy_visits" Type="Self.therapy_visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="physicians">
+        <PropertyRef Name="physician_ID" />
+      </Principal>
+      <Dependent Role="therapy_visits">
+        <PropertyRef Name="therapy_referring_doctor_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prescription_medication_interactions_prescription_medications">
+    <End Role="prescription_medications" Type="Self.prescription_medications" Multiplicity="1" />
+    <End Role="prescription_medication_interactions" Type="Self.prescription_medication_interactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="prescription_medications">
+        <PropertyRef Name="medicine_ID" />
+      </Principal>
+      <Dependent Role="prescription_medication_interactions">
+        <PropertyRef Name="medicine_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_therapeutic_facilities_state">
+    <End Role="states" Type="Self.state" Multiplicity="1" />
+    <End Role="therapeutic_facilities" Type="Self.therapeutic_facilities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="states">
+        <PropertyRef Name="state_ID" />
+      </Principal>
+      <Dependent Role="therapeutic_facilities">
+        <PropertyRef Name="state_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_therapeutic_facilities_zipcode">
+    <End Role="zipcodes" Type="Self.zipcode" Multiplicity="1" />
+    <End Role="therapeutic_facilities" Type="Self.therapeutic_facilities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="zipcodes">
+        <PropertyRef Name="zipcode_ID" />
+      </Principal>
+      <Dependent Role="therapeutic_facilities">
+        <PropertyRef Name="zipcode_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_therapy_visits_therapeutic_facilities1">
+    <End Role="therapeutic_facilities" Type="Self.therapeutic_facilities" Multiplicity="1" />
+    <End Role="therapy_visits" Type="Self.therapy_visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="therapeutic_facilities">
+        <PropertyRef Name="facility_ID" />
+      </Principal>
+      <Dependent Role="therapy_visits">
+        <PropertyRef Name="therapy_info_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_therapy_visits_therapy_visit_types">
+    <End Role="therapy_visit_types" Type="Self.therapy_visit_types" Multiplicity="1" />
+    <End Role="therapy_visits" Type="Self.therapy_visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="therapy_visit_types">
+        <PropertyRef Name="therapy_visit_type_ID" />
+      </Principal>
+      <Dependent Role="therapy_visits">
+        <PropertyRef Name="therapy_visit_type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Medical_MachineEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="allergic_medications" EntityType="Self.allergic_medications" />
+    <EntitySet Name="cities" EntityType="Self.city" />
+    <EntitySet Name="clinic_types" EntityType="Self.clinic_types" />
+    <EntitySet Name="clinical_visits" EntityType="Self.clinical_visits" />
+    <EntitySet Name="clinics" EntityType="Self.clinic" />
+    <EntitySet Name="facility_types" EntityType="Self.facility_types" />
+    <EntitySet Name="general_medications" EntityType="Self.general_medications" />
+    <EntitySet Name="hospital_departments" EntityType="Self.hospital_departments" />
+    <EntitySet Name="hospital_visits" EntityType="Self.hospital_visits" />
+    <EntitySet Name="hospitals" EntityType="Self.hospital" />
+    <EntitySet Name="medical_conditions" EntityType="Self.medical_conditions" />
+    <EntitySet Name="medicine_dosage_units" EntityType="Self.medicine_dosage_units" />
+    <EntitySet Name="medicine_forms" EntityType="Self.medicine_forms" />
+    <EntitySet Name="medicine_strength_units" EntityType="Self.medicine_strength_units" />
+    <EntitySet Name="pharmacies" EntityType="Self.pharmacy" />
+    <EntitySet Name="physician_specialties" EntityType="Self.physician_specialties" />
+    <EntitySet Name="physician_visits" EntityType="Self.physician_visits" />
+    <EntitySet Name="physicians" EntityType="Self.physician" />
+    <EntitySet Name="prescription_medication_interactions" EntityType="Self.prescription_medication_interactions" />
+    <EntitySet Name="prescription_medications" EntityType="Self.prescription_medications" />
+    <EntitySet Name="states" EntityType="Self.state" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="therapeutic_facilities" EntityType="Self.therapeutic_facilities" />
+    <EntitySet Name="therapy_visit_types" EntityType="Self.therapy_visit_types" />
+    <EntitySet Name="therapy_visits" EntityType="Self.therapy_visits" />
+    <EntitySet Name="vitamins" EntityType="Self.vitamin" />
+    <EntitySet Name="zipcodes" EntityType="Self.zipcode" />
+    <AssociationSet Name="FK_clinics_city" Association="Self.FK_clinics_city">
+      <End Role="cities" EntitySet="cities" />
+      <End Role="clinics" EntitySet="clinics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hospitals_city" Association="Self.FK_hospitals_city">
+      <End Role="cities" EntitySet="cities" />
+      <End Role="hospitals" EntitySet="hospitals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pharmacies_city" Association="Self.FK_pharmacies_city">
+      <End Role="cities" EntitySet="cities" />
+      <End Role="pharmacies" EntitySet="pharmacies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_physicians_city" Association="Self.FK_physicians_city">
+      <End Role="cities" EntitySet="cities" />
+      <End Role="physicians" EntitySet="physicians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_therapeutic_facilities_city" Association="Self.FK_therapeutic_facilities_city">
+      <End Role="cities" EntitySet="cities" />
+      <End Role="therapeutic_facilities" EntitySet="therapeutic_facilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_clinics_clinic_types" Association="Self.FK_clinics_clinic_types">
+      <End Role="clinic_types" EntitySet="clinic_types" />
+      <End Role="clinics" EntitySet="clinics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_clinical_visits_clinics" Association="Self.FK_clinical_visits_clinics">
+      <End Role="clinics" EntitySet="clinics" />
+      <End Role="clinical_visits" EntitySet="clinical_visits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_clinical_visits_physicians" Association="Self.FK_clinical_visits_physicians">
+      <End Role="physicians" EntitySet="physicians" />
+      <End Role="clinical_visits" EntitySet="clinical_visits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_clinics_state" Association="Self.FK_clinics_state">
+      <End Role="states" EntitySet="states" />
+      <End Role="clinics" EntitySet="clinics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_clinics_zipcode" Association="Self.FK_clinics_zipcode">
+      <End Role="zipcodes" EntitySet="zipcodes" />
+      <End Role="clinics" EntitySet="clinics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_therapeutic_facilities_facility_types" Association="Self.FK_therapeutic_facilities_facility_types">
+      <End Role="facility_types" EntitySet="facility_types" />
+      <End Role="therapeutic_facilities" EntitySet="therapeutic_facilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prescription_medication_interactions_general_medications" Association="Self.FK_prescription_medication_interactions_general_medications">
+      <End Role="general_medications" EntitySet="general_medications" />
+      <End Role="prescription_medication_interactions" EntitySet="prescription_medication_interactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hospitals_hospital_departments" Association="Self.FK_hospitals_hospital_departments">
+      <End Role="hospital_departments" EntitySet="hospital_departments" />
+      <End Role="hospitals" EntitySet="hospitals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hospital_visits_hospitals" Association="Self.FK_hospital_visits_hospitals">
+      <End Role="hospitals" EntitySet="hospitals" />
+      <End Role="hospital_visits" EntitySet="hospital_visits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hospital_visits_physicians" Association="Self.FK_hospital_visits_physicians">
+      <End Role="physicians" EntitySet="physicians" />
+      <End Role="hospital_visits" EntitySet="hospital_visits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hospitals_physicians" Association="Self.FK_hospitals_physicians">
+      <End Role="physicians" EntitySet="physicians" />
+      <End Role="hospitals" EntitySet="hospitals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hospitals_state" Association="Self.FK_hospitals_state">
+      <End Role="states" EntitySet="states" />
+      <End Role="hospitals" EntitySet="hospitals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hospitals_zipcode" Association="Self.FK_hospitals_zipcode">
+      <End Role="zipcodes" EntitySet="zipcodes" />
+      <End Role="hospitals" EntitySet="hospitals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_medical_conditions_physicians" Association="Self.FK_medical_conditions_physicians">
+      <End Role="physicians" EntitySet="physicians" />
+      <End Role="medical_conditions" EntitySet="medical_conditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prescription_medications_medicine_dosage_units" Association="Self.FK_prescription_medications_medicine_dosage_units">
+      <End Role="medicine_dosage_units" EntitySet="medicine_dosage_units" />
+      <End Role="prescription_medications" EntitySet="prescription_medications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_vitamins_medicine_dosage_units" Association="Self.FK_vitamins_medicine_dosage_units">
+      <End Role="medicine_dosage_units" EntitySet="medicine_dosage_units" />
+      <End Role="vitamins" EntitySet="vitamins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prescription_medications_medicine_forms" Association="Self.FK_prescription_medications_medicine_forms">
+      <End Role="medicine_forms" EntitySet="medicine_forms" />
+      <End Role="prescription_medications" EntitySet="prescription_medications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prescription_medications_medicine_strength_units" Association="Self.FK_prescription_medications_medicine_strength_units">
+      <End Role="medicine_strength_units" EntitySet="medicine_strength_units" />
+      <End Role="prescription_medications" EntitySet="prescription_medications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_vitamins_medicine_strength_units" Association="Self.FK_vitamins_medicine_strength_units">
+      <End Role="medicine_strength_units" EntitySet="medicine_strength_units" />
+      <End Role="vitamins" EntitySet="vitamins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pharmacies_state" Association="Self.FK_pharmacies_state">
+      <End Role="states" EntitySet="states" />
+      <End Role="pharmacies" EntitySet="pharmacies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pharmacies_zipcode" Association="Self.FK_pharmacies_zipcode">
+      <End Role="zipcodes" EntitySet="zipcodes" />
+      <End Role="pharmacies" EntitySet="pharmacies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prescription_medications_pharmacies" Association="Self.FK_prescription_medications_pharmacies">
+      <End Role="pharmacies" EntitySet="pharmacies" />
+      <End Role="prescription_medications" EntitySet="prescription_medications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_physicians_physician_specialties" Association="Self.FK_physicians_physician_specialties">
+      <End Role="physician_specialties" EntitySet="physician_specialties" />
+      <End Role="physicians" EntitySet="physicians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_physician_visits_physicians" Association="Self.FK_physician_visits_physicians">
+      <End Role="physicians" EntitySet="physicians" />
+      <End Role="physician_visits" EntitySet="physician_visits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_physicians_state" Association="Self.FK_physicians_state">
+      <End Role="states" EntitySet="states" />
+      <End Role="physicians" EntitySet="physicians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_physicians_zipcode" Association="Self.FK_physicians_zipcode">
+      <End Role="zipcodes" EntitySet="zipcodes" />
+      <End Role="physicians" EntitySet="physicians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prescription_medications_physicians" Association="Self.FK_prescription_medications_physicians">
+      <End Role="physicians" EntitySet="physicians" />
+      <End Role="prescription_medications" EntitySet="prescription_medications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_therapy_visits_physicians" Association="Self.FK_therapy_visits_physicians">
+      <End Role="physicians" EntitySet="physicians" />
+      <End Role="therapy_visits" EntitySet="therapy_visits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prescription_medication_interactions_prescription_medications" Association="Self.FK_prescription_medication_interactions_prescription_medications">
+      <End Role="prescription_medications" EntitySet="prescription_medications" />
+      <End Role="prescription_medication_interactions" EntitySet="prescription_medication_interactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_therapeutic_facilities_state" Association="Self.FK_therapeutic_facilities_state">
+      <End Role="states" EntitySet="states" />
+      <End Role="therapeutic_facilities" EntitySet="therapeutic_facilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_therapeutic_facilities_zipcode" Association="Self.FK_therapeutic_facilities_zipcode">
+      <End Role="zipcodes" EntitySet="zipcodes" />
+      <End Role="therapeutic_facilities" EntitySet="therapeutic_facilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_therapy_visits_therapeutic_facilities1" Association="Self.FK_therapy_visits_therapeutic_facilities1">
+      <End Role="therapeutic_facilities" EntitySet="therapeutic_facilities" />
+      <End Role="therapy_visits" EntitySet="therapy_visits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_therapy_visits_therapy_visit_types" Association="Self.FK_therapy_visits_therapy_visit_types">
+      <End Role="therapy_visit_types" EntitySet="therapy_visit_types" />
+      <End Role="therapy_visits" EntitySet="therapy_visits" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

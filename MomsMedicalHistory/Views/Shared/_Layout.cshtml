@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+</head>
+<body>
+    <div id="content-wrapper">
+        <header>
+            <div id="slide-show"></div>
+            <nav>
+                <ul id="menu">
+                    <li><a href="javascript:DoNothing();">Medicine</a></li>
+                    <li><a href="javascript:DoNothing();">Physician</a></li>
+                    <li><a href="javascript:DoNothing();">Therapy</a></li>
+                    <li><a href="javascript:DoNothing();">Hostpital</a></li>
+                    <li>
+                        <a href="javascript:DoNothing();">Miscellaneous Lists</a>
+                        <ul>
+                            <li>Allergic Medications</li>
+                            <li><a href="@Url.Action("CityList", "CityTransaction")">Cities</a></li> 
+                        </ul>
+                    </li>
+                    <li><a href="javascript:DoNothing();">Reports</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section>             
+            <div id="heart"></div> 
+            <hr />
+            <div id="render-body">                
+                @RenderBody()
+            </div>
+            <div id="edit-panel">
+                <form id="edit-form" action="">
+                    <div id="data-entry-panel">
+
+                    </div>
+                    <div id="edit-form-buttons">
+                        <label id="confirmation-message"></label>
+                        <input id="submit" type="submit" value="submit" />
+                        <input id="close" type="button" value="close" />
+                    </div>
+                </form> 
+            </div>
+        </section>        
+        <footer> 
+            <p>&copy; @DateTime.Now.Year - Mom's Medical History</p>
+        </footer>
+    </div>
+    <script>
+
+        function ToggleEditPanel() {
+            jQuery("#edit-panel").toggle("drop", { direction: "left" }, 1000);
+        }
+
+        function DoNothing() { }
+
+        function ConfirmationMessage(msg, color)
+        {
+            jQuery("#confirmation-message")
+                .text(msg)
+                .css("color", color)
+                .toggle("fade", 1000);
+        }
+
+        function ConfirmationMessageHide()
+        {
+            jQuery("#confirmation-message")
+                .hide();
+        }
+
+        function ExecuteTransaction(togglePanel, refresh, controller, action, confirmationMessage, id) { 
+                jQuery
+                    .ajax(
+                    {
+                        type: 'POST',
+                        url: location.protocol + '//' + location.host + '/' + controller + '/' + action + ((id.toString().length > 0) ? '/' + id : ''),
+                        dataType: 'html',
+                        data: jQuery("#edit-form").serialize(),
+                        success: function (response, textStatus) {
+                            jQuery("#data-entry-panel").html(response);
+                            if (refresh)
+                                RefreshRenderBody();
+                            if (togglePanel)  
+                                ToggleEditPanel(); 
+                            if (confirmationMessage.toString().length > 0)
+                                ConfirmationMessage(confirmationMessage, "green");
+                            
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            ConfirmationMessage(errorThrown, "yellow");
+                        }
+                    }
+                );
+        }
+        
+        function ExecuteLoad(togglePanel, destinationElementName, controller, action, id)
+        {
+            jQuery
+                .ajax(
+                {
+                    type: 'GET',
+                    url: location.protocol + '//' + location.host + '/' + controller + '/' + action + ((id.toString().length > 0) ? '/' + id : ''),
+                    dataType: 'html',
+                    success: function(response, textStatus)
+                    {
+                        jQuery("#" + destinationElementName).html(response);
+                        if (togglePanel)
+                            ToggleEditPanel();
+                    }
+                }
+                );
+        }
+
+        jQuery(document).ready(function () {
+            jQuery("#edit-form")
+              .submit(function (e) {
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+                  ConfirmationMessageHide();
+                  SubmitTransaction(false);
+              });
+            jQuery("#close")
+                .click(function () {
+                    ConfirmationMessageHide();
+                    ToggleEditPanel();
+                });
+           
+        });
+    </script>
+    @RenderSection("render_body_scripts", required: false)
+    @RenderSection("data_entry_panel_scripts", required: false)
+     
+</body>
+</html>

@@ -1,0 +1,13 @@
+﻿
+@using MomsMedicalHistory.Models
+@model IEnumerable<city>
+
+<h2>City List</h2>
+<hr />
+<ul>
+    @foreach (city city in Model)
+    {
+        <li>@Html.ActionLink(city.city_name, "CityList", "CityTransactionController", new { id = city.city_ID, href = "javascript:ViewModelRecord(" + city.city_ID + ")" })</li>
+    }
+</ul>
+

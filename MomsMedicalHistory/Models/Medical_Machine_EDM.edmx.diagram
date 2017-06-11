@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="145798feead04768b577e4219f53970f" Name="Diagram1">
+        <EntityTypeShape EntityType="Medical_MachineModel.allergic_medications" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.city" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.clinic_types" Width="1.5" PointX="0.75" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.clinical_visits" Width="1.5" PointX="11.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.clinic" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.facility_types" Width="1.5" PointX="3.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.general_medications" Width="1.5" PointX="11.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.hospital_departments" Width="1.5" PointX="3.75" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.hospital_visits" Width="1.5" PointX="8.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.hospital" Width="1.5" PointX="6" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.medical_conditions" Width="1.5" PointX="5.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.medicine_dosage_units" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.medicine_forms" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.medicine_strength_units" Width="1.5" PointX="6" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.pharmacy" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.physician_specialties" Width="1.5" PointX="0.75" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.physician_visits" Width="1.5" PointX="5.25" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.physician" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.prescription_medication_interactions" Width="1.5" PointX="13.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.prescription_medications" Width="1.5" PointX="8.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.state" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.therapeutic_facilities" Width="1.5" PointX="6" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.therapy_visit_types" Width="1.5" PointX="9" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.therapy_visits" Width="1.5" PointX="11.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.vitamin" Width="1.5" PointX="11.25" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Medical_MachineModel.zipcode" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <AssociationConnector Association="Medical_MachineModel.FK_clinics_city" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_hospitals_city" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_pharmacies_city" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_physicians_city" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_therapeutic_facilities_city" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_clinics_clinic_types" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_clinical_visits_clinics" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_clinical_visits_physicians" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_clinics_state" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_clinics_zipcode" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_therapeutic_facilities_facility_types" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_prescription_medication_interactions_general_medications" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_hospitals_hospital_departments" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_hospital_visits_hospitals" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_hospital_visits_physicians" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_hospitals_physicians" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_hospitals_state" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_hospitals_zipcode" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_medical_conditions_physicians" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_prescription_medications_medicine_dosage_units" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_vitamins_medicine_dosage_units" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_prescription_medications_medicine_forms" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_prescription_medications_medicine_strength_units" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_vitamins_medicine_strength_units" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_pharmacies_state" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_pharmacies_zipcode" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_prescription_medications_pharmacies" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_physicians_physician_specialties" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_physician_visits_physicians" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_physicians_state" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_physicians_zipcode" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_prescription_medications_physicians" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_therapy_visits_physicians" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_prescription_medication_interactions_prescription_medications" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_therapeutic_facilities_state" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_therapeutic_facilities_zipcode" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_therapy_visits_therapeutic_facilities1" ManuallyRouted="false" />
+        <AssociationConnector Association="Medical_MachineModel.FK_therapy_visits_therapy_visit_types" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

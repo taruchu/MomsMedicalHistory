@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Medical_MachineModelStoreContainer" CdmEntityContainer="Medical_MachineEntities">
+    <EntitySetMapping Name="allergic_medications">
+      <EntityTypeMapping TypeName="Medical_MachineModel.allergic_medications">
+        <MappingFragment StoreEntitySet="allergic_medications">
+          <ScalarProperty Name="allergic_ID" ColumnName="allergic_ID" />
+          <ScalarProperty Name="allergic_name" ColumnName="allergic_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cities">
+      <EntityTypeMapping TypeName="Medical_MachineModel.city">
+        <MappingFragment StoreEntitySet="cities">
+          <ScalarProperty Name="city_ID" ColumnName="city_ID" />
+          <ScalarProperty Name="city_name" ColumnName="city_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clinic_types">
+      <EntityTypeMapping TypeName="Medical_MachineModel.clinic_types">
+        <MappingFragment StoreEntitySet="clinic_types">
+          <ScalarProperty Name="clinic_type_ID" ColumnName="clinic_type_ID" />
+          <ScalarProperty Name="clinic_type_name" ColumnName="clinic_type_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clinical_visits">
+      <EntityTypeMapping TypeName="Medical_MachineModel.clinical_visits">
+        <MappingFragment StoreEntitySet="clinical_visits">
+          <ScalarProperty Name="clinic_visit_ID" ColumnName="clinic_visit_ID" />
+          <ScalarProperty Name="clinic_info_ID" ColumnName="clinic_info_ID" />
+          <ScalarProperty Name="clinic_visit_date" ColumnName="clinic_visit_date" />
+          <ScalarProperty Name="clinic_visit_time" ColumnName="clinic_visit_time" />
+          <ScalarProperty Name="clinic_referring_doctor_ID" ColumnName="clinic_referring_doctor_ID" />
+          <ScalarProperty Name="clinic_detailed_treatment" ColumnName="clinic_detailed_treatment" />
+          <ScalarProperty Name="clinic_results" ColumnName="clinic_results" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clinics">
+      <EntityTypeMapping TypeName="Medical_MachineModel.clinic">
+        <MappingFragment StoreEntitySet="clinics">
+          <ScalarProperty Name="clinic_ID" ColumnName="clinic_ID" />
+          <ScalarProperty Name="clinic_name" ColumnName="clinic_name" />
+          <ScalarProperty Name="clinic_type_ID" ColumnName="clinic_type_ID" />
+          <ScalarProperty Name="clinic_phone" ColumnName="clinic_phone" />
+          <ScalarProperty Name="clinic_address" ColumnName="clinic_address" />
+          <ScalarProperty Name="city_ID" ColumnName="city_ID" />
+          <ScalarProperty Name="state_ID" ColumnName="state_ID" />
+          <ScalarProperty Name="zipcode_ID" ColumnName="zipcode_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="facility_types">
+      <EntityTypeMapping TypeName="Medical_MachineModel.facility_types">
+        <MappingFragment StoreEntitySet="facility_types">
+          <ScalarProperty Name="facility_type_ID" ColumnName="facility_type_ID" />
+          <ScalarProperty Name="facility_type_name" ColumnName="facility_type_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="general_medications">
+      <EntityTypeMapping TypeName="Medical_MachineModel.general_medications">
+        <MappingFragment StoreEntitySet="general_medications">
+          <ScalarProperty Name="general_medicine_ID" ColumnName="general_medicine_ID" />
+          <ScalarProperty Name="general_medicine_name" ColumnName="general_medicine_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hospital_departments">
+      <EntityTypeMapping TypeName="Medical_MachineModel.hospital_departments">
+        <MappingFragment StoreEntitySet="hospital_departments">
+          <ScalarProperty Name="hospital_department_ID" ColumnName="hospital_department_ID" />
+          <ScalarProperty Name="hospital_department_name" ColumnName="hospital_department_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hospital_visits">
+      <EntityTypeMapping TypeName="Medical_MachineModel.hospital_visits">
+        <MappingFragment StoreEntitySet="hospital_visits">
+          <ScalarProperty Name="hospital_visit_ID" ColumnName="hospital_visit_ID" />
+          <ScalarProperty Name="hospital_info_ID" ColumnName="hospital_info_ID" />
+          <ScalarProperty Name="hospital_visit_date" ColumnName="hospital_visit_date" />
+          <ScalarProperty Name="hospital_visit_reason" ColumnName="hospital_visit_reason" />
+          <ScalarProperty Name="hospital_attending_physician_ID" ColumnName="hospital_attending_physician_ID" />
+          <ScalarProperty Name="hospital_visit_discharge_direction" ColumnName="hospital_visit_discharge_direction" />
+          <ScalarProperty Name="hospital_diagnosis" ColumnName="hospital_diagnosis" />
+          <ScalarProperty Name="hospital_wasAdmitted" ColumnName="hospital_wasAdmitted" />
+          <ScalarProperty Name="hospital_co_insurer" ColumnName="hospital_co_insurer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hospitals">
+      <EntityTypeMapping TypeName="Medical_MachineModel.hospital">
+        <MappingFragment StoreEntitySet="hospitals">
+          <ScalarProperty Name="hospital_ID" ColumnName="hospital_ID" />
+          <ScalarProperty Name="hospital_name" ColumnName="hospital_name" />
+          <ScalarProperty Name="hospital_department_ID" ColumnName="hospital_department_ID" />
+          <ScalarProperty Name="hospital_physician_ID" ColumnName="hospital_physician_ID" />
+          <ScalarProperty Name="hospital_phone" ColumnName="hospital_phone" />
+          <ScalarProperty Name="hospital_address" ColumnName="hospital_address" />
+          <ScalarProperty Name="city_ID" ColumnName="city_ID" />
+          <ScalarProperty Name="state_ID" ColumnName="state_ID" />
+          <ScalarProperty Name="zipcode_ID" ColumnName="zipcode_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="medical_conditions">
+      <EntityTypeMapping TypeName="Medical_MachineModel.medical_conditions">
+        <MappingFragment StoreEntitySet="medical_conditions">
+          <ScalarProperty Name="medical_condition_ID" ColumnName="medical_condition_ID" />
+          <ScalarProperty Name="medical_condition" ColumnName="medical_condition" />
+          <ScalarProperty Name="medical_condition_diagnosis_date" ColumnName="medical_condition_diagnosis_date" />
+          <ScalarProperty Name="medical_condition_diagnosing_doctor_ID" ColumnName="medical_condition_diagnosing_doctor_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="medicine_dosage_units">
+      <EntityTypeMapping TypeName="Medical_MachineModel.medicine_dosage_units">
+        <MappingFragment StoreEntitySet="medicine_dosage_units">
+          <ScalarProperty Name="medicine_dosage_unit_ID" ColumnName="medicine_dosage_unit_ID" />
+          <ScalarProperty Name="medicine_dosage_unit" ColumnName="medicine_dosage_unit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="medicine_forms">
+      <EntityTypeMapping TypeName="Medical_MachineModel.medicine_forms">
+        <MappingFragment StoreEntitySet="medicine_forms">
+          <ScalarProperty Name="medicine_form_ID" ColumnName="medicine_form_ID" />
+          <ScalarProperty Name="medicine_form" ColumnName="medicine_form" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="medicine_strength_units">
+      <EntityTypeMapping TypeName="Medical_MachineModel.medicine_strength_units">
+        <MappingFragment StoreEntitySet="medicine_strength_units">
+          <ScalarProperty Name="medicine_strength_unit_ID" ColumnName="medicine_strength_unit_ID" />
+          <ScalarProperty Name="medicine_strength_units1" ColumnName="medicine_strength_units" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pharmacies">
+      <EntityTypeMapping TypeName="Medical_MachineModel.pharmacy">
+        <MappingFragment StoreEntitySet="pharmacies">
+          <ScalarProperty Name="pharmacy_ID" ColumnName="pharmacy_ID" />
+          <ScalarProperty Name="pharmacy_name" ColumnName="pharmacy_name" />
+          <ScalarProperty Name="pharmacy_phone" ColumnName="pharmacy_phone" />
+          <ScalarProperty Name="pharmacy_address" ColumnName="pharmacy_address" />
+          <ScalarProperty Name="city_ID" ColumnName="city_ID" />
+          <ScalarProperty Name="state_ID" ColumnName="state_ID" />
+          <ScalarProperty Name="zipcode_ID" ColumnName="zipcode_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="physician_specialties">
+      <EntityTypeMapping TypeName="Medical_MachineModel.physician_specialties">
+        <MappingFragment StoreEntitySet="physician_specialties">
+          <ScalarProperty Name="physician_specialty_ID" ColumnName="physician_specialty_ID" />
+          <ScalarProperty Name="specialty_name" ColumnName="specialty_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="physician_visits">
+      <EntityTypeMapping TypeName="Medical_MachineModel.physician_visits">
+        <MappingFragment StoreEntitySet="physician_visits">
+          <ScalarProperty Name="physician_visit_ID" ColumnName="physician_visit_ID" />
+          <ScalarProperty Name="physician_info_ID" ColumnName="physician_info_ID" />
+          <ScalarProperty Name="physician_visit_date" ColumnName="physician_visit_date" />
+          <ScalarProperty Name="physician_visit_time" ColumnName="physician_visit_time" />
+          <ScalarProperty Name="physician_visit_blood_pressure" ColumnName="physician_visit_blood_pressure" />
+          <ScalarProperty Name="physician_visit_weight" ColumnName="physician_visit_weight" />
+          <ScalarProperty Name="physician_visit_temperature" ColumnName="physician_visit_temperature" />
+          <ScalarProperty Name="physician_visit_reason" ColumnName="physician_visit_reason" />
+          <ScalarProperty Name="physician_visit_result" ColumnName="physician_visit_result" />
+          <ScalarProperty Name="physician_visit_note" ColumnName="physician_visit_note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="physicians">
+      <EntityTypeMapping TypeName="Medical_MachineModel.physician">
+        <MappingFragment StoreEntitySet="physicians">
+          <ScalarProperty Name="physician_ID" ColumnName="physician_ID" />
+          <ScalarProperty Name="physician_specialty_ID" ColumnName="physician_specialty_ID" />
+          <ScalarProperty Name="physician_phone" ColumnName="physician_phone" />
+          <ScalarProperty Name="physician_lastname" ColumnName="physician_lastname" />
+          <ScalarProperty Name="physician_firstname" ColumnName="physician_firstname" />
+          <ScalarProperty Name="physician_address" ColumnName="physician_address" />
+          <ScalarProperty Name="city_ID" ColumnName="city_ID" />
+          <ScalarProperty Name="state_ID" ColumnName="state_ID" />
+          <ScalarProperty Name="zipcode_ID" ColumnName="zipcode_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prescription_medication_interactions">
+      <EntityTypeMapping TypeName="Medical_MachineModel.prescription_medication_interactions">
+        <MappingFragment StoreEntitySet="prescription_medication_interactions">
+          <ScalarProperty Name="prescription_medicine_interaction_ID" ColumnName="prescription_medicine_interaction_ID" />
+          <ScalarProperty Name="general_medicine_ID" ColumnName="general_medicine_ID" />
+          <ScalarProperty Name="medicine_ID" ColumnName="medicine_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prescription_medications">
+      <EntityTypeMapping TypeName="Medical_MachineModel.prescription_medications">
+        <MappingFragment StoreEntitySet="prescription_medications">
+          <ScalarProperty Name="medicine_ID" ColumnName="medicine_ID" />
+          <ScalarProperty Name="medicine_name" ColumnName="medicine_name" />
+          <ScalarProperty Name="medicine_prescription_physician_ID" ColumnName="medicine_prescription_physician_ID" />
+          <ScalarProperty Name="medicine_form_ID" ColumnName="medicine_form_ID" />
+          <ScalarProperty Name="medicine_strength" ColumnName="medicine_strength" />
+          <ScalarProperty Name="medicine_strength_unit_ID" ColumnName="medicine_strength_unit_ID" />
+          <ScalarProperty Name="medicine_dosage" ColumnName="medicine_dosage" />
+          <ScalarProperty Name="medicine_dosage_unit_ID" ColumnName="medicine_dosage_unit_ID" />
+          <ScalarProperty Name="medicine_pharmacy_ID" ColumnName="medicine_pharmacy_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="states">
+      <EntityTypeMapping TypeName="Medical_MachineModel.state">
+        <MappingFragment StoreEntitySet="states">
+          <ScalarProperty Name="state_ID" ColumnName="state_ID" />
+          <ScalarProperty Name="state_name" ColumnName="state_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Medical_MachineModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="therapeutic_facilities">
+      <EntityTypeMapping TypeName="Medical_MachineModel.therapeutic_facilities">
+        <MappingFragment StoreEntitySet="therapeutic_facilities">
+          <ScalarProperty Name="facility_ID" ColumnName="facility_ID" />
+          <ScalarProperty Name="facility_type_ID" ColumnName="facility_type_ID" />
+          <ScalarProperty Name="facility_name" ColumnName="facility_name" />
+          <ScalarProperty Name="facility_phone" ColumnName="facility_phone" />
+          <ScalarProperty Name="facility_address" ColumnName="facility_address" />
+          <ScalarProperty Name="city_ID" ColumnName="city_ID" />
+          <ScalarProperty Name="state_ID" ColumnName="state_ID" />
+          <ScalarProperty Name="zipcode_ID" ColumnName="zipcode_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="therapy_visit_types">
+      <EntityTypeMapping TypeName="Medical_MachineModel.therapy_visit_types">
+        <MappingFragment StoreEntitySet="therapy_visit_types">
+          <ScalarProperty Name="therapy_visit_type_ID" ColumnName="therapy_visit_type_ID" />
+          <ScalarProperty Name="therapy_visit_type_name" ColumnName="therapy_visit_type_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="therapy_visits">
+      <EntityTypeMapping TypeName="Medical_MachineModel.therapy_visits">
+        <MappingFragment StoreEntitySet="therapy_visits">
+          <ScalarProperty Name="therapy_visit_ID" ColumnName="therapy_visit_ID" />
+          <ScalarProperty Name="therapy_info_ID" ColumnName="therapy_info_ID" />
+          <ScalarProperty Name="therapy_visit_date" ColumnName="therapy_visit_date" />
+          <ScalarProperty Name="therapy_visit_time" ColumnName="therapy_visit_time" />
+          <ScalarProperty Name="therapy_visit_type_ID" ColumnName="therapy_visit_type_ID" />
+          <ScalarProperty Name="therapy_visit_fee" ColumnName="therapy_visit_fee" />
+          <ScalarProperty Name="therapy_referring_doctor_ID" ColumnName="therapy_referring_doctor_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vitamins">
+      <EntityTypeMapping TypeName="Medical_MachineModel.vitamin">
+        <MappingFragment StoreEntitySet="vitamins">
+          <ScalarProperty Name="vitamin_ID" ColumnName="vitamin_ID" />
+          <ScalarProperty Name="vitamin_name" ColumnName="vitamin_name" />
+          <ScalarProperty Name="medicine_dosage_ID" ColumnName="medicine_dosage_ID" />
+          <ScalarProperty Name="medicine_dosage" ColumnName="medicine_dosage" />
+          <ScalarProperty Name="medicine_strength_ID" ColumnName="medicine_strength_ID" />
+          <ScalarProperty Name="medicine_strength" ColumnName="medicine_strength" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="zipcodes">
+      <EntityTypeMapping TypeName="Medical_MachineModel.zipcode">
+        <MappingFragment StoreEntitySet="zipcodes">
+          <ScalarProperty Name="zipcode_ID" ColumnName="zipcode_ID" />
+          <ScalarProperty Name="zipcode1" ColumnName="zipcode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

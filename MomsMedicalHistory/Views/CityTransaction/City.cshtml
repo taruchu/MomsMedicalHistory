@@ -1,0 +1,11 @@
+﻿
+@using MomsMedicalHistory.Models
+@model city
+
+<h2>Data Entry for Cities</h2>
+<hr/>
+@Html.TextBoxFor(m => m.city_ID, new {@class = "hidden"})
+<label>City Name:</label>
+@Html.TextBoxFor(m => m.city_name, new {required = "true" })
+
+ 

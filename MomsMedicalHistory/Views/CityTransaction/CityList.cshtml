@@ -1,0 +1,30 @@
+﻿
+
+@{
+    ViewBag.Title = "City List";
+}
+
+@{ 
+    Html.RenderPartial("CityListPartial");
+}
+
+@section render_body_scripts
+{
+    <script>
+
+        function SubmitTransaction(togglePanel)
+        {
+            ExecuteTransaction(togglePanel, true, 'CityTransaction', 'ExecuteCityTransaction', 'city data was successfully updated mom...', '');
+        }
+
+        function ViewModelRecord(id)
+        {  
+            ExecuteLoad(true, "data-entry-panel", 'CityTransaction', 'ViewCity', id);
+        }
+
+        function RefreshRenderBody()
+        {
+            ExecuteLoad(false, "render-body", 'CityTransaction', 'CityListRefresh', '');
+        }
+    </script>    
+}
